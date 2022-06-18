@@ -44,4 +44,28 @@ update.addEventListener('click', _ => {
         }
       })
       .catch(error => console.error(error))
+
+    })
+      deleteButton.addEventListener('click', _ => {
+        fetch('/quotes', {
+          method: 'delete',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'inkredible'
+          })
+        })
+          .then(res => {
+            if (res.ok) return res.json()
+          })
+        //   .then(data => {
+        //     window.location.reload()
+        //   })
+        .then(response => {
+            if (response === 'No quote to delete') {
+              messageDiv.textContent = 'No Darth Vadar quote to delete'
+            } else {
+              window.location.reload(true)
+            }
+          })
+          .catch(error => console.error(error))
   })
